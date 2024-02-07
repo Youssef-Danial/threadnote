@@ -1,0 +1,68 @@
+<div class="showerleft">
+    <button
+      class="btn btn-circle"
+      hx-get="{% url 'home:show_thread' thread.pk %}"
+      hx-target="#base"
+      hx-swap="innerHtml"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    {% load mytags %}
+    <div class="btn btn-ghost btn-lg">{{thread}}</div>
+    
+    <h4 class = "p-4">this thread Access Settings</h4>
+
+    <div id="here">
+        <select name="accesstype" class="select select-primary w-full max-w-xs" required>
+            <option value="v" selected>Access View</option>
+            <option value="e">Access Edit</option>
+          </select>
+        <input id="username" class="input input-bordered w-full max-w-xs p-5" placeholder="Friend name" name="username" type="text"/>
+        <button class="btn btn-primary" hx-post="{% url 'home:threadaccess' thread.pk %}" hx-target="#res" hx-swap="afterbegin" hx-include="[name='username'],[name='accesstype']">Add</button>
+    </div>
+    <br>
+    <br>
+    
+    <div id="res" class="grid sm:grid-cols1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for aces in thread.access_set.all %}
+      <div id='accesshome{{aces.pk}}' class="collapse bg-base-200">
+        <input type="checkbox"/> 
+        <div class="collapse-title text-xl font-medium">
+          {{aces.user}} <p>{{ aces.access_type|accesstype}}</p>
+        </div>
+        <div class="collapse-content">
+          <button class="btn btn-circle btn-warning" hx-delete="{% url 'home:threadaccess' thread.pk %}?access_id={{aces.pk}}" hx-target="#toasting" hx-swap="beforeend" _="on click wait 1s then remove #accesshome{{aces.pk}}">remove</button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <br>
+    <br>
+    <!-- Open the modal using ID.showModal() method -->
+    
+  <script>
+    // console.log("your script is working")
+    // document.getElementById("here").addEventListener("htmx:aftersend", ({ detail }) => {
+    //     // log the request object to the console
+    //     console.log(detail);
+    //     // append "hi" to the form data
+    //     //detail.parameters["greeting"] = "hi";
+    //     // reset the form
+    //     //document.getElementById("user-input").reset();
+    //   });
+  </script>      
+  </div>
+  

@@ -1,0 +1,21 @@
+{% load mytags %}
+<div id='accesshome{{aces.pk}}' class="collapse bg-base-200">
+    <input type="checkbox"/> 
+    <div class="collapse-title text-xl font-medium">
+      {{aces.user}} <p>{{ aces.access_type|accesstype}}</p>
+    </div>
+    <div class="collapse-content">
+        <button class="btn btn-circle btn-warning" hx-delete="{% url 'home:threadaccess' aces.thread.pk %}?access_id={{aces.pk}}" hx-target="#toasting" hx-swap="beforeend" _="on click wait 1s then remove #accesshome{{aces.pk}}">remove</button>
+    </div>
+</div>
+<div hx-swap-oob="beforeend:#toasting">
+<div id="toas" class="alert alert-{{alert}} self-removing-div" _="on mouseover remove me">
+    <span>{{message}}</span>
+</div>
+<script>    
+    setTimeout(function(){
+        var popup = document.getElementById("toas")
+        popup.remove();
+    }, 4000);
+</script>
+</div>

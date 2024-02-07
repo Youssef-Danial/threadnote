@@ -1,0 +1,97 @@
+<html lang="en" data-theme="light">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign In</title>
+    {% load static %}
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1153.0" data-gr-ext-installed="">
+    <div class="hero min-h-screen bg-base-200">
+      <div class="hero-content flex-col lg:flex-row-reverse">
+        <div class="text-center lg:text-left">
+          <h1 class="text-5xl font-bold">ThreadNote</h1>
+          <p class="py-6">
+            Embark on a journey of simplicity and style with our innovative
+            note-taking platform. Experience the seamless collaboration that
+            transforms ordinary notes into extraordinary ideas. Elevate your
+            productivity with our user-friendly interface and enjoy a new era of
+            teamwork. Join us and redefine the way you take notes – where
+            simplicity meets sophistication, and collaboration knows no bounds
+          </p>
+          <div>
+            <p class="p-2">
+              If you have not created an account yet, then please
+            </p>
+
+            <a class="justify-center btn btn-secondary" href="/accounts/signup/"
+              >Sign Up</a
+            >
+          </div>
+        </div>
+
+        <div></div>
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <form class="card-body" method="post" action="/accounts/login/">
+            {% csrf_token %}
+            <div class="form-control">
+              <label class="label" for="id_login">
+                <span class="label-text">Username</span>
+              </label>
+              <input
+                class="input input-bordered"
+                type="text"
+                name="login"
+                placeholder="Username"
+                autocomplete="username"
+                maxlength="150"
+                required=""
+                id="id_login"
+              />
+            </div>
+
+            <div class="form-control">
+              <label class="label" for="id_password">
+                <span class="label-text">Password</span>
+              </label>
+              <input
+                class="input input-bordered"
+                type="password"
+                name="password"
+                placeholder="Password"
+                autocomplete="current-password"
+                required=""
+                aria-describedby="id_password_helptext"
+                id="id_password"
+              />
+
+              <span class="helptext" id="id_password_helptext"
+                ><a href="/accounts/password/reset/"
+                  >Forgot your password?</a
+                ></span
+              >
+            </div>
+
+            <div class="form-control">
+              <label class="label" for="id_remember">Remember Me</label>
+              <input
+                class="checkbox checkbox-primary"
+                type="checkbox"
+                name="remember"
+                id="id_remember"
+              />
+            </div>
+
+            <input type="hidden" name="next" value="/" />
+            <div class="form-control mt-6">
+              <button class="btn btn-active btn-primary" type="submit">
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link href="{% static 'full.min.css'%}" rel="stylesheet" type="text/css" />
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <script src="{% static '3.4.1' %}"></script>
+</html>

@@ -1,0 +1,94 @@
+<html data-theme="light">
+  <head>
+    {% load static %}
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup</title>
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1153.0" data-gr-ext-installed="">
+    <div class="hero min-h-screen bg-base-200">
+      <div class="hero-content flex-col lg:flex-row-reverse">
+          
+        </div>
+        
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <form class="card-body" method="post" action="/accounts/signup/">
+            {% csrf_token %}
+            <div class="form-control">
+              <label class="label" for="id_username">Username:</label>
+              <input
+                class="input input-bordered"
+                type="text"
+                name="username"
+                placeholder="Username"
+                autocomplete="username"
+                minlength="1"
+                maxlength="150"
+                required=""
+                id="id_username"
+              />
+            </div>
+            <div class="form-control">
+              <label class="label" for="id_email">Email (optional):</label>
+              <input
+                class="input input-bordered"
+                type="email"
+                name="email"
+                placeholder="Email address"
+                autocomplete="email"
+                maxlength="320"
+                id="id_email"
+              />
+            </div>
+            <div class="form-control">
+              <label class="label" for="id_password1">Password:</label>
+              <input
+                class="input input-bordered"
+                type="password"
+                name="password1"
+                placeholder="Password"
+                autocomplete="new-password"
+                required=""
+                aria-describedby="id_password1_helptext"
+                id="id_password1"
+              />
+              <span class="helptext" id="id_password1_helptext"></span>
+            </div>
+            <ul>
+              <li>
+                Your password can’t be too similar to your other personal
+                information.
+              </li>
+              <li>Your password must contain at least 8 characters.</li>
+              <li>Your password can’t be a commonly used password.</li>
+              <li>Your password can’t be entirely numeric.</li>
+            </ul>
+            <p></p>
+            <div class="form-control">
+              <label class="label" for="id_password2">Password (again):</label>
+              <input
+                class="input input-bordered"
+                type="password"
+                name="password2"
+                placeholder="Password (again)"
+                autocomplete="new-password"
+                required=""
+                id="id_password2"
+              />
+            </div>
+            <button class="btn btn-primary" type="submit">Sign Up</button>
+          </form>
+          
+        <div class="form-control">
+              <div class="label">Already have an account? Then please</div>
+              <a class="btn btn-secondary" href="/accounts/login/">Sign In</a>.
+          
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <link href="{% static 'full.min.css'%}" rel="stylesheet" type="text/css" />
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <script src="{% static '3.4.1' %}"></script>
+</html>

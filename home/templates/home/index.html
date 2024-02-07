@@ -1,0 +1,24 @@
+{% extends 'home\base.html' %}
+{% block threadblock %}
+    <div class=" shower grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for thread in page %}
+    <div class="card shadow-xl transform transition-all hover:scale-125">
+        <div class="card-body">
+          <h2 class="card-title">{{thread}}</h2>
+          <p>{{thread.description}}</p>
+          <p>Last Modified : {{thread.modify_date}}</p>
+          
+          <div class="card-actions justify-end">
+            <button class="btn btn-primary" hx-get="{% url 'home:show_thread' thread.pk %}" hx-target="#base" hx-swap="innerHtml">Open Thread</button>
+          </div>
+          <p>Owner: <strong>{{thread.creator}}</strong></p>
+        </div>
+    </div>
+    {% endfor %}  
+    </div>    
+{% endblock %}
+<div class="join">
+  <button class="join-item btn">«</button>
+  <button class="join-item btn">Page 22</button>
+  <button class="join-item btn">»</button>
+</div>

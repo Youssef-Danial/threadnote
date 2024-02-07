@@ -1,0 +1,9 @@
+<div id="toas" class="alert alert-{{alert}} self-removing-div" _="on mouseover remove me">
+    <span>{{message}}</span>
+</div>
+<script>    
+    setTimeout(function(){
+        var popup = document.getElementById("toas")
+        popup.remove();
+    }, 4000);
+</script>

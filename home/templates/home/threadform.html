@@ -1,0 +1,24 @@
+<div class="showerright flex justify-center">
+  <form
+    id="user-input"
+    hx-post="{% url 'home:create_thread' %}"
+    hx-target="#base"
+    hx-swap="innerHtml"
+    hx-reset-on-success
+  >
+    {{threadform.as_p}}
+    <div class="py-6">
+      <input class="btn btn-active btn-netural" type="submit" value="Create" />
+    </div>
+  </form>
+  <script>
+    document.getElementById("user-input").addEventListener("htmx:configRequest", ({ detail }) => {
+        // log the request object to the console
+        // console.log(detail);
+        // // append "hi" to the form data
+        // detail.parameters["greeting"] = "hi";
+        // // reset the form
+        // document.getElementById("user-input").reset();
+      });
+  </script>
+</div>

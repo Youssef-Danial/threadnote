@@ -1,0 +1,66 @@
+<div class="showerleft">
+  <button
+    class="btn btn-circle"
+    hx-get="{% url 'home:show_thread' thread.pk %}"
+    hx-target="#base"
+    hx-swap="innerHtml"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  </button>
+
+  <div class="btn btn-ghost btn-lg">{{thread}}</div>
+  <h4>this thread Settings</h4>
+  <div class="grid sm:grid-cols1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    {{settingsform.media}} {{settingsform.as_div}}
+  </div>
+  <br>
+  <br>
+  <!-- Open the modal using ID.showModal() method -->
+  <button class="btn btn-warning" onclick="my_modal_5.showModal()">
+    Delete
+  </button>
+  <button
+    class="btn btn-primary"
+    hx-post="{% url 'home:show_thread_settings' thread.pk %}"
+    hx-target="#toasting"
+    hx-swap="beforeend"
+    hx-include="[name='description'], [name='title'], [name='privacy']"
+  >
+    Update
+  </button>
+  <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <h3 class="font-bold text-lg">
+        Are you sure you want to delete the thread
+      </h3>
+      <p class="py-4">Press ESC key or click the button below to close</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+          <button
+            class="btn btn-error"
+            hx-delete="{% url 'home:show_thread_settings' thread.pk %}"
+            hx-target="#base"
+            hx-swap="innerHtml"
+          >
+            Delete
+          </button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+</div>

@@ -1,0 +1,40 @@
+<div class="showerleft">
+  {% load mytags %}
+  {% is_authorized_edit user.id thread.id as authorized %}
+
+  <div class="btn btn-ghost btn-lg" hx-get="{% url 'home:show_thread' thread.pk %}" hx-target="#base"
+    hx-swap="innerHtml">{{thread}}</div>
+  <p class="pb-4 pl-4">{{thread.description}}</p>
+  {% if authorized %}
+  <div class="flex">
+    <button class="btn btn-sm" hx-get="{% url 'home:show_thread_settings' thread.pk %}" hx-target="#base"
+      hx-swap="innerHtml">Settings</button>
+    <button class="btn btn-sm" hx-get="{% url 'home:access' thread.pk %}" hx-target="#base"
+      hx-swap="innerHtml">Access</button>
+    <button hx-post="{% url 'home:create_note' thread.pk %}" hx-target="#base" hx-swap="innerHtml"
+      class="btn btn-sm btn-primary">
+      Create Note
+    </button>
+  </div>
+  {% endif %}
+  <br>
+  <br>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    {% for note in thread.get_notes %}
+    <div class="card shadow-xl transform transition-all hover:scale-125">
+      <div class="card-body">
+        <h2 class="card-title">{{note | safe}}</h2>
+        <p>{{note.creator}}</p>
+        <div class="card-actions justify-end">
+          <button hx-get="{% url 'home:show_note' note.pk %}" hx-target="#base" hx-swap="innerHtml"
+            class="btn btn-primary">
+            Open Note
+          </button>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+</div>
