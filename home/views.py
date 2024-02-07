@@ -19,10 +19,12 @@ def is_authorized(user_id, thread_id):
 @login_required
 def homepage(request):
     threads = request.user.get_threads()
-    paginator = Paginator(threads,2)
+    paginator = Paginator(threads,9)
     if "page" in request.GET:
         pagenumber = int(request.GET["page"])
         page = paginator.get_page(pagenumber)
+        content = {"user":request.user, "threadform":Threadform(), "page":page}
+        return render(request,"home/threads.html",content)
     else:
         page = paginator.get_page(1)
     content = {"user":request.user, "threadform":Threadform(), "page":page}
@@ -37,7 +39,14 @@ def show_thread(request, id):
 @login_required
 def get_threads(request):
     user = request.user
-    content = {"user":user}
+    threads = request.user.get_threads()
+    paginator = Paginator(threads,9)
+    if "page" in request.GET:
+        pagenumber = int(request.GET["page"])
+        page = paginator.get_page(pagenumber)
+    else:
+        page = paginator.get_page(1)
+    content = {"user":user,"page":page}
     return render(request,"home/threads.html",content)
 
 @login_required

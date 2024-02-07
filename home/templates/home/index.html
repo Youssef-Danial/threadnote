@@ -1,6 +1,6 @@
 {% extends 'home\base.html' %}
 {% block threadblock %}
-    <div class=" shower grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="showerleft grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
     {% for thread in page %}
     <div class="card shadow-xl transform transition-all hover:scale-125">
         <div class="card-body">
@@ -14,11 +14,18 @@
           <p>Owner: <strong>{{thread.creator}}</strong></p>
         </div>
     </div>
-    {% endfor %}  
-    </div>    
+    {% endfor %} 
+    </div>  
+    <div class="flex justify-center pt-10">
+      <div class="join">
+        
+        {% if page.has_previous %}
+        <button class="join-item btn" hx-get="/?page={{page.previous_page_number}}" hx-target="#base" hx-swap="innerHtml">«</button>
+        {% endif %}
+        <button class="join-item btn">{{page.number}}</button>
+        {% if page.has_next %}
+        <button class="join-item btn" hx-get="/?page={{page.next_page_number}}" hx-target="#base" hx-swap="innerHtml">»</button>
+        {% endif %}
+      </div> 
+    </div>  
 {% endblock %}
-<div class="join">
-  <button class="join-item btn">«</button>
-  <button class="join-item btn">Page 22</button>
-  <button class="join-item btn">»</button>
-</div>
